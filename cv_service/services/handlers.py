@@ -21,18 +21,18 @@ from cv_service.adapter import views
 
 
 class JobInfoViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = JobInfoSerializer
 
     def get_queryset(self):
-        queryset = JobInfo.objects.all()
+        queryset = JobInfo.objects.filter(created_by=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cmd = commands.JobInfo(**serializer.validated_data)
-        views.create_jobinfo(cmd=cmd)
+        views.create_jobinfo(cmd=cmd, user=self.request.user)
 
         return Response(
             {"success": "job info created successfully"},
@@ -41,18 +41,18 @@ class JobInfoViewSet(viewsets.ModelViewSet):
 
 
 class PersonalInfoViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = PersonalInfoSerializer
 
     def get_queryset(self):
-        queryset = PersonalInfo.objects.all()
+        queryset = PersonalInfo.objects.filter(created_by=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cmd = commands.PersonalInfo(**serializer.validated_data)
-        views.create_personalinfo(cmd=cmd)
+        views.create_personalinfo(cmd=cmd, user=self.request.user)
 
         return Response(
             {"success": "personal info created successfully"},
@@ -61,18 +61,18 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
 
 
 class EducationInfoViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = EducationInfoSerializer
 
     def get_queryset(self):
-        queryset = EducationInfo.objects.all()
+        queryset = EducationInfo.objects.filter(created_by=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cmd = commands.EducationInfo(**serializer.validated_data)
-        views.create_educationinfo(cmd=cmd)
+        views.create_educationinfo(cmd=cmd, user=self.request.user)
 
         return Response(
             {"success": "education info created successfully"},
@@ -81,18 +81,18 @@ class EducationInfoViewSet(viewsets.ModelViewSet):
 
 
 class WorkInfoViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = WorkInfoSerializer
 
     def get_queryset(self):
-        queryset = WorkInfo.objects.all()
+        queryset = WorkInfo.objects.filter(created_by=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cmd = commands.WorkInfo(**serializer.validated_data)
-        views.create_workinfo(cmd=cmd)
+        views.create_workinfo(cmd=cmd, user=self.request.user)
 
         return Response(
             {"success": "work info created successfully"},
@@ -101,20 +101,35 @@ class WorkInfoViewSet(viewsets.ModelViewSet):
 
 
 class LanguageInfoViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = LanguageInfoSerializer
 
     def get_queryset(self):
-        queryset = LanguageInfo.objects.all()
+        queryset = LanguageInfo.objects.filter(created_by=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         cmd = commands.LanguageInfo(**serializer.validated_data)
-        views.create_languageinfo(cmd=cmd)
+        views.create_languageinfo(cmd=cmd, user=self.request.user)
 
         return Response(
             {"success": "Language info created successfully"},
             status=status.HTTP_201_CREATED,
         )
+
+
+class GetMyCvView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)

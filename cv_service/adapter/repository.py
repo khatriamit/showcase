@@ -16,6 +16,7 @@ class JobInfoSQLRepository:
         expected_salary,
         current_salary,
         carrer_summery,
+        user,
     ):
         with transaction.atomic():
             job_info = orm.JobInfo.objects.create(
@@ -27,6 +28,7 @@ class JobInfoSQLRepository:
                 expected_salary=expected_salary,
                 current_salary=current_salary,
                 carrer_summery=carrer_summery,
+                created_by=user,
             )
             return job_info
 
@@ -44,6 +46,7 @@ class PersonalInfoSQLRepository:
         dob,
         marital_status,
         religion,
+        user,
     ):
         with transaction.atomic():
             personal_info = orm.PersonalInfo.objects.create(
@@ -54,6 +57,7 @@ class PersonalInfoSQLRepository:
                 dob=dob,
                 marital_status=marital_status,
                 religion=religion,
+                created_by=user,
             )
             return personal_info
 
@@ -71,6 +75,7 @@ class EducationInfoSQLRepository:
         currently_studying,
         marks,
         graduation_year,
+        user,
     ):
         with transaction.atomic():
             education_info = orm.EducationInfo.objects.create(
@@ -81,6 +86,7 @@ class EducationInfoSQLRepository:
                 currently_studying=currently_studying,
                 marks=marks,
                 graduation_year=graduation_year,
+                created_by=user,
             )
             return education_info
 
@@ -101,6 +107,7 @@ class WorkInfoSQLRepository:
         end_date,
         responsiblity,
         is_current,
+        user,
     ):
         with transaction.atomic():
             work_info = orm.WorkInfo.objects.create(
@@ -114,6 +121,7 @@ class WorkInfoSQLRepository:
                 end_date=end_date,
                 responsiblity=responsiblity,
                 is_current=is_current,
+                created_by=user,
             )
             return work_info
 
@@ -129,6 +137,7 @@ class LanguageInfoSQLRepository:
         reading,
         writing,
         listening,
+        user,
     ):
         with transaction.atomic():
             language_info = orm.LanguageInfo.objects.create(
@@ -137,5 +146,6 @@ class LanguageInfoSQLRepository:
                 reading=reading,
                 writing=writing,
                 listening=listening,
+                created_by=user,
             )
             return language_info
