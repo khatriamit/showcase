@@ -20,5 +20,5 @@ router.register("language_info", LanguageInfoViewSet, basename="language_info")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("my_cv", GetMyCvView.as_view()),
+    path("my_cv/", GetMyCvView.as_view()),
 ]
