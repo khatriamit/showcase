@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 # from blog_service.entrypoint.routes import urlpatterns as blog_url
+from cv_service.entrypoint.routes import urlpatterns as cv_url
 from auth_service.entrypoint.routes import urlpatterns as auth_url
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -15,4 +16,5 @@ urlpatterns = [
 ]
 
 # urlpatterns += blog_url
+urlpatterns += cv_url
 urlpatterns += auth_url
