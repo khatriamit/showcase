@@ -116,3 +116,26 @@ class WorkInfoSQLRepository:
                 is_current=is_current,
             )
             return work_info
+
+
+class LanguageInfoSQLRepository:
+    def __init__(self) -> None:
+        pass
+
+    def create_languageinfo(
+        self,
+        language,
+        speaking,
+        reading,
+        writing,
+        listening,
+    ):
+        with transaction.atomic():
+            language_info = orm.LanguageInfo.objects.create(
+                language=language,
+                speaking=speaking,
+                reading=reading,
+                writing=writing,
+                listening=listening,
+            )
+            return language_info
