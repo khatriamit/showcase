@@ -1,10 +1,18 @@
 from rest_framework import viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from app.models import EducationInfo, JobInfo, PersonalInfo, User, WorkInfo
+from app.models import (
+    EducationInfo,
+    JobInfo,
+    LanguageInfo,
+    PersonalInfo,
+    User,
+    WorkInfo,
+)
 from cv_service.services.serializer import (
     EducationInfoSerializer,
     JobInfoSerializer,
+    LanguageInfoSerializer,
     PersonalInfoSerializer,
     WorkInfoSerializer,
 )
@@ -88,5 +96,25 @@ class WorkInfoViewSet(viewsets.ModelViewSet):
 
         return Response(
             {"success": "work info created successfully"},
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class LanguageInfoViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = LanguageInfoSerializer
+
+    def get_queryset(self):
+        queryset = LanguageInfo.objects.all()
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        cmd = commands.LanguageInfo(**serializer.validated_data)
+        views.create_languageinfo(cmd=cmd)
+
+        return Response(
+            {"success": "Language info created successfully"},
             status=status.HTTP_201_CREATED,
         )
