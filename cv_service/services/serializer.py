@@ -14,6 +14,7 @@ class JobInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobInfo
         fields = [
+            "id",
             "job_categories",
             "position",
             "available_for",
@@ -31,6 +32,7 @@ class PersonalInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonalInfo
         fields = [
+            "id",
             "mobile",
             "temporary_address",
             "permanent_address",
@@ -45,6 +47,7 @@ class EducationInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationInfo
         fields = [
+            "id",
             "degree",
             "program",
             "board",
@@ -61,6 +64,7 @@ class WorkInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkInfo
         fields = [
+            "id",
             "company_name",
             "type",
             "board",
@@ -78,6 +82,7 @@ class LanguageInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = LanguageInfo
         fields = [
+            "id",
             "language",
             "speaking",
             "reading",
