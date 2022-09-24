@@ -124,12 +124,17 @@ class GetMyCvView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset_ji = JobInfo.objects.filter(created_by=self.request.user).first()
+        queryset_pi = PersonalInfo.objects.filter(created_by=self.request.user).first()
+        queryset_ei = EducationInfo.objects.filter(created_by=self.request.user).first()
+        queryset_wi = WorkInfo.objects.filter(created_by=self.request.user).first()
+        queryset_li = LanguageInfo.objects.filter(created_by=self.request.user).first()
 
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        data = {
+            "job_info": JobInfoSerializer(queryset_ji).data,
+            "personal_info": PersonalInfoSerializer(queryset_pi).data,
+            "education_info": EducationInfoSerializer(queryset_ei).data,
+            "work_info": WorkInfoSerializer(queryset_wi).data,
+            "language_info": LanguageInfoSerializer(queryset_li).data,
+        }
+        return Response(data)
