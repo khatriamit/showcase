@@ -1,6 +1,13 @@
 from django.db import transaction
 from rest_framework import serializers
-from app.models import EducationInfo, PersonalInfo, User, JobInfo, WorkInfo
+from app.models import (
+    EducationInfo,
+    LanguageInfo,
+    PersonalInfo,
+    User,
+    JobInfo,
+    WorkInfo,
+)
 
 
 class JobInfoSerializer(serializers.ModelSerializer):
@@ -64,4 +71,16 @@ class WorkInfoSerializer(serializers.ModelSerializer):
             "end_date",
             "responsiblity",
             "is_current",
+        ]
+
+
+class LanguageInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LanguageInfo
+        fields = [
+            "language",
+            "speaking",
+            "reading",
+            "writing",
+            "listening",
         ]
