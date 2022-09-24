@@ -156,3 +156,33 @@ def workinfo_factory(
         responsiblity=responsiblity,
         is_current=is_current,
     )
+
+
+class LanguageInfo(BaseModel):
+    language: str
+    speaking: typing.Optional[int]
+    reading: typing.Optional[int]
+    writing: typing.Optional[int]
+    listening: typing.Optional[int]
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    def update(self, **mapping: typing.Dict):
+        return self.copy(update=mapping)
+
+
+def languageinfo_factory(
+    language: str,
+    speaking: typing.Optional[int],
+    reading: typing.Optional[int],
+    writing: typing.Optional[int],
+    listening: typing.Optional[int],
+) -> LanguageInfo:
+    return LanguageInfo(
+        language=language,
+        speaking=speaking,
+        reading=reading,
+        writing=writing,
+        listening=listening,
+    )
