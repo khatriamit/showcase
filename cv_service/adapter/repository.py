@@ -18,6 +18,15 @@ class JobInfoSQLRepository:
         carrer_summery,
         user,
     ):
+        """
+        ORM query for adding job info
+
+        Params: job_categories, position,available_for,
+                specializations,skills,expected_salary,
+                current_salary, carrer_summery, user,
+
+        Returns orm object
+        """
         with transaction.atomic():
             job_info = orm.JobInfo.objects.create(
                 job_categories=job_categories,
@@ -48,6 +57,14 @@ class PersonalInfoSQLRepository:
         religion,
         user,
     ):
+        """
+        ORM query for adding personal info
+
+        Params: mobile, temporary_address, permanent_address,
+                gender,dob,marital_status,religion, user,
+
+        Returns orm object
+        """
         with transaction.atomic():
             personal_info = orm.PersonalInfo.objects.create(
                 mobile=mobile,
@@ -77,6 +94,15 @@ class EducationInfoSQLRepository:
         graduation_year,
         user,
     ):
+        """
+        ORM query for adding education info
+
+        Params: degree,program,board,institiue_name,
+                currently_studying,marks,graduation_year,
+                user,
+
+        Returns orm object
+        """
         with transaction.atomic():
             education_info = orm.EducationInfo.objects.create(
                 degree=degree,
@@ -109,6 +135,15 @@ class WorkInfoSQLRepository:
         is_current,
         user,
     ):
+        """
+        ORM query for adding work info
+
+        Params: degree,program,board,institiue_name,
+                currently_studying,marks,graduation_year,
+                user,
+
+        Returns orm object
+        """
         with transaction.atomic():
             work_info = orm.WorkInfo.objects.create(
                 company_name=company_name,
@@ -139,6 +174,14 @@ class LanguageInfoSQLRepository:
         listening,
         user,
     ):
+        """
+        ORM query for adding language info
+
+        Params: language,speaking,reading,writing,
+                listening, user,
+
+        Returns orm object
+        """
         with transaction.atomic():
             language_info = orm.LanguageInfo.objects.create(
                 language=language,

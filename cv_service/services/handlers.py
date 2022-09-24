@@ -21,6 +21,12 @@ from cv_service.adapter import views
 
 
 class JobInfoViewSet(viewsets.ModelViewSet):
+    """
+    View for creating job info
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = JobInfoSerializer
 
@@ -41,6 +47,12 @@ class JobInfoViewSet(viewsets.ModelViewSet):
 
 
 class PersonalInfoViewSet(viewsets.ModelViewSet):
+    """
+    View for creating personal info
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = PersonalInfoSerializer
 
@@ -61,6 +73,12 @@ class PersonalInfoViewSet(viewsets.ModelViewSet):
 
 
 class EducationInfoViewSet(viewsets.ModelViewSet):
+    """
+    View for creating education info
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = EducationInfoSerializer
 
@@ -81,6 +99,12 @@ class EducationInfoViewSet(viewsets.ModelViewSet):
 
 
 class WorkInfoViewSet(viewsets.ModelViewSet):
+    """
+    View for creating work info
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = WorkInfoSerializer
 
@@ -101,6 +125,12 @@ class WorkInfoViewSet(viewsets.ModelViewSet):
 
 
 class LanguageInfoViewSet(viewsets.ModelViewSet):
+    """
+    View for creating language info
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = LanguageInfoSerializer
 
@@ -121,6 +151,12 @@ class LanguageInfoViewSet(viewsets.ModelViewSet):
 
 
 class GetMyCvView(generics.ListAPIView):
+    """
+    View for getting cv details
+    Protected api
+    Registered user are allowed to request the api
+    """
+
     permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):

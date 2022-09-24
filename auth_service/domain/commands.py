@@ -3,7 +3,8 @@ from pydantic import BaseModel as Model, validator
 
 class RegisterUser(Model):
     """
-    Command parses and validates the data before passing it to the domain model
+    Command parses and validates the data
+    before passing it to the domain model
     """
 
     first_name: str
