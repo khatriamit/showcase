@@ -25,3 +25,9 @@ def create_workinfo(cmd: commands.WorkInfo):
     models.workinfo_factory(**cmd.dict())
     repository_ = repository.WorkInfoSQLRepository()
     repository_.create_workinfo(**cmd.dict())
+
+
+def create_languageinfo(cmd: commands.LanguageInfo):
+    models.languageinfo_factory(**cmd.dict())
+    repository_ = repository.LanguageInfoSQLRepository()
+    repository_.create_languageinfo(**cmd.dict())
