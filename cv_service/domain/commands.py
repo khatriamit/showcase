@@ -45,3 +45,11 @@ class WorkInfo(Model):
     start_date: date
     responsiblity: str
     is_current: Optional[bool]
+
+
+class LanguageInfo(Model):
+    language: str
+    speaking: Optional[int]
+    reading: Optional[int]
+    writing: Optional[int]
+    listening: Optional[int]
