@@ -12,6 +12,11 @@ from auth_service.adapter import views
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    View for listing all the users registered in the system
+    Should be authenticated users to access this api
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
     allowed_heads = ["get"]
@@ -22,6 +27,11 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class RegisterUserViewSet(viewsets.ModelViewSet):
+    """
+    View for registering the users
+    open api, can be used by anyone for registering
+    """
+
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
     allowed_heads = ["post"]
