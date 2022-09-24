@@ -20,6 +20,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(max_length=50, required=True)
     last_name = serializers.CharField(max_length=50, required=True)
     username = serializers.CharField(max_length=50, required=True)
+    email = serializers.CharField(max_length=50, required=True)
     confirm_password = serializers.CharField(
         max_length=50, min_length=8, write_only=True
     )
